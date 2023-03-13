@@ -1,0 +1,21 @@
+---
+title: "sr-curve"
+output: html_notebook
+---
+
+```{r}
+source("config.R")
+library(httr)
+library(tidyverse)
+library(jsonlite)
+```
+
+```{r}
+q_params <- list(search_text = "treasury+bill+note+bond", api_key = FRED_api_key, file_type = "json")
+url <- "https://api.stlouisfed.org/"
+resp <- GET(url, path = "fred/series/search", query = q_params)
+body <- content(resp, "text")
+parsed_data <- fromJSON(body)
+parsed_data
+```
+
